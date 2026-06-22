@@ -1,25 +1,31 @@
-name: Compile LaTeX Document
-on: [push]
-jobs:
-  build_latex:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v4
+\documentclass[12pt,a4paper]{report}
 
-      - name: Install Arabic/Persian Fonts
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y fonts-hosny-amiri
+% بسته‌های مورد نیاز برای ریاضیات، تصاویر و جدول‌ها
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
 
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: main.tex
-          compiler: xelatex
+% بسته زی‌پرشین برای نگارش فارسی (باید آخرین بسته باشد)
+\usepackage{xepersian}
 
-      - name: Upload PDF Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: PDF_Report
-          path: main.pdf
+% تعیین فونت مناسب فارسی موجود روی سرور گیت‌هاب
+\settextfont{Amiri}
+\setlatintextfont{Times New Roman}
+
+\title{عنوان گزارش پروژه}
+\author{محمدسینا بهرامیان}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\chapter{مقدمه}
+\section{بیان مسئله}
+این اولین نسخه از گزارش فارسی است که به صورت کاملاً خودکار در گیت‌هاب کامپایل می‌شود. 
+متن‌های بعدی فایل ورد را به مرور به این بخش اضافه خواهیم کرد.
+
+\end{document}
